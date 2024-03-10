@@ -21,7 +21,7 @@ const mapPageToPrinciples = async(page,browser) => {
 }
 
 const mapPrincipleToGuidelines = async (principle,browser) => {
-  const guidelineElements = await principle.$$(".guideline")
+  const guidelineElements = await principle.$$(":scope > .guideline")
   const guidelinePromises = guidelineElements.map(async (guidlineElement)=> {
     const titleElement = await guidlineElement.$("h3");
     const title = await titleElement.evaluate(el => el.textContent.replace("§",""));
@@ -49,7 +49,7 @@ const mapPrincipleToGuidelines = async (principle,browser) => {
 }
 
 const mapGuidelineToSuccessCriteria = async (guideline,browser) => {
-  const successCriteriaElements = await guideline.$$(".sc")
+  const successCriteriaElements = await guideline.$$(".guideline")
   const successCriteriaPromises = successCriteriaElements.map(async (successCriteriaElement)=> {
     const titleElement = await successCriteriaElement.$("h4");
     const title = await titleElement.evaluate(el => el.textContent.replace("§",""));
